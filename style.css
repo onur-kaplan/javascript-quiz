@@ -1,6 +1,17 @@
 body {
     background-color: #f8f9fa!important;
 }
+*:focus {outline: none !important; box-shadow: none  !important;}
 .bg-purple {
     background-color: #6f42c1;
+}
+.answer-choices-box input{
+    display: none;
+}
+input[type="radio"] + label{ 
+    cursor: pointer;
+}
+input[type="radio"]:checked+label{ 
+    background: #ff9800;
+    color: #fff;
 }

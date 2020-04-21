@@ -1,9 +1,12 @@
 "use stict";
 let choisesAnsData = [];
 let quizItemTemplate = "";
-let answersTemplate = "";
 let quizItemContainer =  document.querySelector('.quiz-item-container');
 let quizChoicesContainer =  document.querySelector('.answer-choices-box');
+let selectedAnswerResult =  document.querySelector('.selected-answer-result');
+let resultModal =  document.querySelector('#resultModal');
+let showResult =  document.querySelector('#show-result');
+
 let  allQuestionsData = [
   {
     questionID: 1,
@@ -47,24 +50,26 @@ let  allQuestionsData = [
   }
 ];
 
-let rightAnswers = [
+let correctAnswers = [
   {
     questionID: 1,
-    right: "b"
+    correctAnswer: "b"
   },
   {
     questionID: 2,
-    right: "d"
+    correctAnswer: "d"
   },
   {
     questionID: 3,
-    right: "d"
+    correctAnswer: "d"
   },
   {
     questionID: 4,
-    answers: "d"
+    correctAnswer: "d"
   }
 ];
+
+let selectedData = [];
 
 
 allQuestionsData.map(questions => {
@@ -78,8 +83,11 @@ allQuestionsData.map(questions => {
           questions.answers.map(items => 
             `
             <div class="d-flex align-items-center mb-3">
-              <input type="radio" id="op-${questions.questionID}-${items.opC}" name="customRadio" class="mr-3">
-              <label class="mb-0 w-100 alert alert-secondary" for="op-${questions.questionID}-${items.opC}">${items.opT}</label>
+              <input type="radio" id="op-${questions.questionID}-${items.opC}" name="customRadio" class="mr-3" 
+              onchange="setAnswer('${questions.questionID}', '${items.opC}', '${items.opT}')">
+              <label class="mb-0 w-100 alert alert-secondary" for="op-${questions.questionID}-${items.opC}">
+              <span class="badge badge-light mr-2">${items.opC} </span>
+              ${items.opT}</label>
             </div>
             `
           ).join("")
@@ -90,6 +98,41 @@ allQuestionsData.map(questions => {
 });
 
 quizItemContainer.innerHTML = quizItemTemplate;
+
+function setAnswer(id, sign, name) {
+  let newObj = { answerID: parseInt(id), answerSign:  sign, answerName: name};
+  if (selectedData.filter(item => parseInt(item.answerID) === parseInt(id)).length == 0) {
+    selectedData.push(newObj);
+  }
+  else {
+    let answerValues = selectedData.filter(item => parseInt(item.answerID) === parseInt(newObj.answerID))[0];
+    answerValues.answerSign = sign;
+    answerValues.answerName = name;
+  }
+
+  console.log(selectedData);
+}
+
+showResult.addEventListener("click", function() {
+  let selectedAnswersTemplate = "";
+
+  selectedData.sort(function (a, b) {
+    return a.answerID - b.answerID;
+  });
+
+  selectedData.map(item => {
+    selectedAnswersTemplate += `
+        <div class="alert alert-success">
+          <span class="badge badge-light mr-2">${item.answerID}. Soru - ${item.answerSign.toUpperCase()} </span> ${item.answerName}
+        </div>
+    `;
+    })
+    selectedAnswerResult.innerHTML = selectedAnswersTemplate;
+})
+
+
+
+
 
 
 
