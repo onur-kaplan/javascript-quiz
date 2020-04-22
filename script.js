@@ -101,19 +101,33 @@ quizItemContainer.innerHTML = quizItemTemplate;
 
 function setAnswer(id, sign, name) {
   let newObj = { answerID: parseInt(id), answerSign:  sign, answerName: name};
-  if (selectedData.filter(item => parseInt(item.answerID) === parseInt(id)).length == 0) {
+  if (selectedData.filter(item => item.answerID === parseInt(id)).length == 0) {
     selectedData.push(newObj);
   }
   else {
-    let answerValues = selectedData.filter(item => parseInt(item.answerID) === parseInt(newObj.answerID))[0];
+    let answerValues = selectedData.filter(item => item.answerID === newObj.answerID)[0];
     answerValues.answerSign = sign;
     answerValues.answerName = name;
   }
 
-  console.log(selectedData);
+
+correctAnswers.filter(item => item.questionID === parseInt(id))
+.filter(fin => {
+  if(fin.correctAnswer === sign){
+    console.log("aynıddd")
+  }
+}) 
+
+  // let arr3 = correctAnswers.map((item, i) => Object.assign({}, item, selectedData[i]));
+
+console.log(selectedData);
+
 }
 
+
 showResult.addEventListener("click", function() {
+
+ 
   let selectedAnswersTemplate = "";
 
   selectedData.sort(function (a, b) {
@@ -128,7 +142,13 @@ showResult.addEventListener("click", function() {
     `;
     })
     selectedAnswerResult.innerHTML = selectedAnswersTemplate;
+
+
 })
+
+
+
+
 
 
 
