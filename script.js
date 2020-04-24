@@ -9,7 +9,7 @@ let startQuiz =  document.querySelector('.start-to-quiz');
 let userPointBox =  document.querySelector('.user-point');
 let resultModal =  document.querySelector('#resultModal');
 let showResult =  document.querySelector('#show-result');
-
+let timerBox = document.querySelector("#count-down");
 
 
 let  allQuestionsData = [
@@ -117,7 +117,7 @@ startQuiz.addEventListener("click", function(){
   this.classList.toggle("d-none");
   questionTitle.style.display = "block";
   renderToData();
-  countdown(2, 30);
+  timer(0, 10)
 })
 
 function setAnswer(id, sign, name) {
@@ -169,32 +169,39 @@ showResult.addEventListener("click", function() {
 
     userPointBox.innerHTML = totapPoint;
     
-    setQuestionsDisabled()
+    setQuestionsDisabled();
+    clearInterval(timerFire)
 })
 
 
 // Timer
-function countdown(min, sec) {
-  let second = sec;
-  let minute = min;
-  function tick() {
-      let counter = document.querySelector("#count-down");
+let timerFire;
+function timer(minute, second) {
+    timerFire = setInterval(contDown, 1000);
+    function contDown() {
       second--;
       let currentTime =  minute + ":" + (second < 10 ? "0" : "") + second;
-      counter.innerHTML = currentTime;
-      if( second > 0 ) {
-          setTimeout(tick, 1000);
-      } else {
-          if(minute >= 1){
-              countdown(minute-1, 60);           
-          } else{
-            setQuestionsDisabled()
-          }
-          
-      }
+      timerBox.innerHTML = currentTime;
+      if(second == 0){
+            if(minute > 0 && second == 0){
+              minute --;
+              second = 60;
+            } else{
+              clearInterval(timerFire);
+              setQuestionsDisabled()
+            }
+      } 
+      
+    }
   }
-  tick();
-}
+
+
+
+
+
+
+
+
 
 // If the time is over all question items are disabled
 function setQuestionsDisabled() {
