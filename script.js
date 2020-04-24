@@ -145,7 +145,7 @@ selectedData.length === allQuestionsData.length ? showResult.style.display = "bl
 
 }
 
-// Show ressult
+// Show ressult fire
 showResult.addEventListener("click", function() {
   let selectedAnswersTemplate = "";
   selectedData.sort(function (a, b) {
@@ -173,6 +173,7 @@ showResult.addEventListener("click", function() {
     clearInterval(timerFire)
 })
 
+ 
 
 // Timer
 let timerFire;
@@ -188,7 +189,8 @@ function timer(minute, second) {
               second = 60;
             } else{
               clearInterval(timerFire);
-              setQuestionsDisabled()
+              setQuestionsDisabled();
+              showResult.click();
             }
       } 
       
