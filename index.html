@@ -20,14 +20,23 @@
       </div>
     </div>
 
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
-      <h3 class="pb-2 mb-3">Questions</h3>
-      <div class="accordion quiz-item-container" id="accordionExample" >
+    <div class="my-3 p-3 bg-white rounded shadow-sm position-relative">
+      
+      <h4 class="alert alert-success count-down-box position-absolute ">
+        <small class="mr-1">Timer</small> <span class="badge badge-dark" id="count-down">1:30</span>
+      </h4>
+
+      <button type="button" class="d-flex align-items-center justify-content-center btn btn-success btn-lg btn-block start-to-quiz">
+        <img class="quiz-start-icon" src="https://image.flaticon.com/icons/svg/748/748890.svg" />
+        <div class="quiz-start-text">Start To Quiz</div>
+      </button>
+      <h3 style="display: none;" class="pb-2 mb-3 question-title">Questions</h3>
+      <div class="mt-4 accordion quiz-item-container" id="accordionExample" >
       </div>
     </div>
     <div class="my-3 p-3 bg-white rounded shadow-sm">
 
-    <button id="show-result" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#resultModal">
+    <button style="display: none;" id="show-result" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#resultModal">
       Sonuçları Göster
     </button>
 
@@ -44,8 +53,8 @@
             
             
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save changes</button>
+          <div class="modal-footer justify-space-between">
+            <div class="total-point"><strong>PUANINIZ:</strong> <strong class="alert alert-success user-point">?</strong> / 100</div>
           </div>
         </div>
       </div>

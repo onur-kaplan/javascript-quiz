@@ -15,3 +15,25 @@ input[type="radio"]:checked+label{
     background: #ff9800;
     color: #fff;
 }
+.count-down-box{
+    right: 1rem;
+    top:1rem;
+    padding: 10px;
+}
+.count-down-box .badge{
+    min-width: 80px;
+    line-height: 30px;
+}
+.quiz-start-icon{
+    width:100px;height:100px; display:block;
+}
+.quiz-start-text{
+    font-size:60px; font-weight:bolder; margin-left:20px;
+}
+.start-to-quiz{
+    margin-top:70px;
+    padding:40px;
+}
+.d-flex.d-none{
+    display: none !important;
+}
