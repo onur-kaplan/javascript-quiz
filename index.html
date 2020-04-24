@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Quiz</title>
+  <title>Quiz DEMO - Make A Quiz App With JavaScript (ES6)</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'>
   <link rel="stylesheet" href="./style.css">
 
@@ -16,14 +16,14 @@
       <img class="mr-3" src="https://image.flaticon.com/icons/svg/717/717765.svg" alt="" width="48" height="48">
       <div class="lh-100">
         <h3 class="mb-0 text-white lh-100">Quiz Demo</h3>
-        <small>Bilgini sına</small>
+        <small>Test your knowledge</small>
       </div>
     </div>
 
     <div class="my-3 p-3 bg-white rounded shadow-sm position-relative">
       
       <h4 class="alert alert-success count-down-box position-absolute ">
-        <small class="mr-1">Timer</small> <span class="badge badge-dark" id="count-down">1:30</span>
+        <small class="mr-1">Quiz Time</small> <span class="badge badge-dark" id="count-down">1:30</span>
       </h4>
 
       <button type="button" class="d-flex align-items-center justify-content-center btn btn-success btn-lg btn-block start-to-quiz">
@@ -37,7 +37,7 @@
     <div class="my-3 p-3 bg-white rounded shadow-sm">
 
     <button style="display: none;" id="show-result" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#resultModal">
-      Sonuçları Göster
+      Show Result
     </button>
 
     <div class="modal fade" id="resultModal" tabindex="-1" >
@@ -54,7 +54,7 @@
             
           </div>
           <div class="modal-footer justify-space-between">
-            <div class="total-point"><strong>PUANINIZ:</strong> <strong class="alert alert-success user-point">?</strong> / 100</div>
+            <div class="total-point"><strong>YOUR POINT:</strong> <strong class="alert alert-success user-point">?</strong> / 100</div>
           </div>
         </div>
       </div>

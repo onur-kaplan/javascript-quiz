@@ -117,7 +117,7 @@ startQuiz.addEventListener("click", function(){
   this.classList.toggle("d-none");
   questionTitle.style.display = "block";
   renderToData();
-  countdown(1, 30);
+  countdown(2, 30);
 })
 
 function setAnswer(id, sign, name) {
@@ -178,14 +178,14 @@ function countdown(min, sec) {
   let second = sec;
   let minute = min;
   function tick() {
-      var counter = document.querySelector("#count-down");
+      let counter = document.querySelector("#count-down");
       second--;
-      let currentTime =  minute-1 + ":" + (second < 10 ? "0" : "") + second;
+      let currentTime =  minute + ":" + (second < 10 ? "0" : "") + second;
       counter.innerHTML = currentTime;
       if( second > 0 ) {
           setTimeout(tick, 1000);
       } else {
-          if(minute > 1){
+          if(minute >= 1){
               countdown(minute-1, 60);           
           } else{
             setQuestionsDisabled()
