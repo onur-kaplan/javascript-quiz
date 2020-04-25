@@ -52,6 +52,16 @@ let allQuestionsData = [
       { opC: "c", opT: "Burdur" },
       { opC: "d", opT: "Bursa" }
     ]
+  },
+  {
+    questionID: 5,
+    question: "Türkiye Cumhuriyeti'nin Kurucusus Kimdir?",
+    answers: [
+      { opC: "a", opT: "Kazim Karabekir" },
+      { opC: "b", opT: "İsmet İnönü" },
+      { opC: "c", opT: "Mustafa Kemal Atatürk" },
+      { opC: "d", opT: "Mehmet Akif Ersoy" }
+    ]
   }
 ];
 
@@ -71,6 +81,10 @@ let correctAnswers = [
   {
     questionID: 4,
     correctAnswer: "d"
+  },
+  {
+    questionID: 5,
+    correctAnswer: "c"
   }
 ];
 
