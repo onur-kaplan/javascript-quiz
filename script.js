@@ -1,15 +1,16 @@
 "use stict";
-let choisesAnsData = [];
-let quizItemTemplate = "";
-let quizItemContainer = document.querySelector('.quiz-item-container');
-let quizChoicesContainer = document.querySelector('.answer-choices-box');
-let selectedAnswerResult = document.querySelector('.selected-answer-result');
-let questionTitle = document.querySelector('.question-title');
-let startQuiz = document.querySelector('.start-to-quiz');
-let userPointBox = document.querySelector('.user-point');
-let resultModal = document.querySelector('#resultModal');
-let showResult = document.querySelector('#show-result');
-let timerBox = document.querySelector("#count-down");
+let choisesAnsData,
+  quizItemTemplate = "",
+  quizItemContainer = document.querySelector('.quiz-item-container'),
+  quizChoicesContainer = document.querySelector('.answer-choices-box'),
+  selectedAnswerResult = document.querySelector('.selected-answer-result'),
+  questionTitle = document.querySelector('.question-title'),
+  startQuiz = document.querySelector('.start-to-quiz'),
+  userPointBox = document.querySelector('.user-point'),
+  resultModal = document.querySelector('#resultModal'),
+  showResult = document.querySelector('#show-result'),
+  showResultContainer = document.querySelector('.result-container'),
+  timerBox = document.querySelector("#count-down");
 
 let allQuestionsData = [
   {
@@ -132,7 +133,7 @@ function setAnswer(id, sign, name) {
     });
 
   // All questions are solved controler
-  selectedData.length === allQuestionsData.length ? showResult.style.display = "block" : "none";
+  selectedData.length === allQuestionsData.length ? showResultContainer.style.display = "block" : "none";
 
 }
 
@@ -146,8 +147,8 @@ showResult.addEventListener("click", function () {
   selectedData.map(item => {
     selectedAnswersTemplate += `
         <div class="alert alert-${item.correctSign === true ? "success" : "danger"}">
-          <span class="badge badge-light mr-2">${item.answerID}. Soru - ${item.answerSign.toUpperCase()} </span> 
-          ${item.correctSign === true ? "<span class='badge badge-success'>Doğru</span>" : "<span class='badge badge-danger'>Yanlış</span>"}
+          <span class="badge badge-light mr-2">${item.answerID}. Question - ${item.answerSign.toUpperCase()} </span> 
+          ${item.correctSign === true ? "<span class='badge badge-success'>True</span>" : "<span class='badge badge-danger'>False</span>"}
           ${item.answerName}
         </div>
     `;
