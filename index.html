@@ -2,77 +2,108 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Quiz DEMO - Build a New Quiz App with JavaScript (ES6)</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <title>Quiz DEMO - Build a New Quiz App with JavaScript (ES6)</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-
-  <main role="main" class="container">
+<main role="main" class="container">
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
-      <img class="mr-3" src="https://image.flaticon.com/icons/svg/717/717765.svg" alt="" width="48" height="48">
-      <div class="lh-100">
-        <h3 class="mb-0 text-white lh-100">Quiz Demo</h3>
-        <small>Test your knowledge</small>
-      </div>
+        <img class="mr-3" src="https://image.flaticon.com/icons/svg/717/717765.svg" alt="" width="48" height="48">
+        <div class="lh-100">
+            <h3 class="mb-0 text-white lh-100">Quiz Demo</h3>
+            <small>Test your knowledge</small>
+        </div>
     </div>
 
-    <div class="my-3 p-3 bg-white rounded shadow-sm position-relative">
-
-      <h4 class="alert alert-success count-down-box position-absolute ">
-        <small class="mr-1">Quiz Time</small> <span class="badge badge-dark" id="count-down">1:30</span>
-      </h4>
-
-      <button type="button"
-        class="d-flex align-items-center justify-content-center btn btn-success btn-lg btn-block start-to-quiz">
-        <img class="quiz-start-icon" src="https://image.flaticon.com/icons/svg/748/748890.svg" />
-        <div class="quiz-start-text">Start To Quiz</div>
-      </button>
-      <h3 style="display: none;" class="pb-2 mb-3 question-title">Questions</h3>
-      <div class="mt-4 accordion quiz-item-container" id="accordionExample">
-      </div>
+    <div class="my-3 p-3 bg-white rounded shadow-sm position-relative" id="main-container">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
 
     <div style="display: none;" class="my-3 p-3 bg-white rounded shadow-sm result-container">
+        <button id="show-result" type="button" class="btn btn-outline-danger" data-toggle="modal"
+                data-target="#resultModal">
+            Show Results
+        </button>
 
-      <button id="show-result" type="button" class="btn btn-outline-danger" data-toggle="modal"
-        data-target="#resultModal">
-        Show Results
-      </button>
+        <div class="modal fade" id="resultModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Results</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body selected-answer-result">
 
-      <div class="modal fade" id="resultModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Results</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+
+                    </div>
+                    <div class="modal-footer justify-space-between">
+                        <div class="total-point"><strong>YOUR POINT:</strong> <strong
+                                class="alert alert-success user-point">?</strong> / 100
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body selected-answer-result">
-
-
-            </div>
-            <div class="modal-footer justify-space-between">
-              <div class="total-point"><strong>YOUR POINT:</strong> <strong
-                  class="alert alert-success user-point">?</strong> / 100</div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
 
-  </main>
+</main>
+<script type="template/my-template" id="questionTemplate">
+    <div class="card answer-item-box">
+        <button style="animation-delay:__QUESTION_ANIMATION_DELAY__s" class="question-item-btn btn btn-dark btn-lg btn-block mb-1 rounded-0 text-left flipInX" type="button" data-toggle="collapse" data-target="#q-__QUESTION_ID__">
+            <span class="badge badge-light mr-2">__QUESTION_ID__ </span> __QUESTION_NAME__
+        </button>
+        <div id="q-__QUESTION_ID__" class="collapse" data-parent="#accordionExample">
+            <div class="card-body answer-choices-box">
+                __ANSWERS__
+            </div>
+        </div>
+    </div>
+</script>
 
+<script type="template/my-template" id="answerTemplate">
+    <div class="d-flex align-items-center mb-3">
+        <input type="radio" id="op-__QUESTION_ID__-__opC__" data-questionID="__QUESTION_ID__" data-opC="__opC__" data-opT="__opT__" name="customRadio" class="mr-3"/>
+        <label class="mb-0 w-100 alert alert-secondary" for="op-__QUESTION_ID__-__opC__">
+            <span class="badge badge-light mr-2">__opC__</span>
+            __opT__
+        </label>
+    </div>
+</script>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script type="template/my-template" id="results">
+    <div class="alert alert-__correctSign__">
+       <span class="badge badge-light mr-2">
+           __answerID__ . Question - __answerSign__
+       </span>
+        __correctSignBadge__
+        __answerName__
+    </div>
+</script>
 
-  <script src="./script.js"></script>
+<script type="template/my-template" id="mainBodyTemplate">
+    <h4 class="alert alert-success count-down-box position-absolute ">
+        <small class="mr-1">Quiz Time</small> <span class="badge badge-dark" id="count-down">1:30</span>
+    </h4>
+    <button type="button"
+    class="d-flex align-items-center justify-content-center btn btn-success btn-lg btn-block start-to-quiz">
+        <img class="quiz-start-icon" src="https://image.flaticon.com/icons/svg/748/748890.svg"/>
+        <div class="quiz-start-text">Start To Quiz</div>
+    </button>
+    <h3 style="display: none;" class="pb-2 mb-3 question-title">Questions</h3>
+        <div class="mt-4 accordion quiz-item-container" id="accordionExample">
+        </div>
+</script>
 
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="./script.js"></script>
 </body>
-
 </html>
