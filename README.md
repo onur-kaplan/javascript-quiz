@@ -1,5 +1,6 @@
-# javascript-quiz
+# Pure Javascript Quiz App
 Build a New Quiz App with JavaScript (ES6)
+View Demo -> https://codepen.io/onur_kaplan/pen/gOaWPdE
 
 - Quiz has a timer
 - Questions are rendering to an html DOM with an array
